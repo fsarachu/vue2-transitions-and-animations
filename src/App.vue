@@ -42,6 +42,25 @@
                         </p>
                     </article>
                 </transition>
+
+                <div class="block">
+                    <button
+                            @click="showCustomMessage = !showCustomMessage"
+                            class="button is-primary">
+                        Custom Message
+                    </button>
+                </div>
+
+                <transition appear enterActiveClass="animated wobble" leaveActiveClass="animated bounceOutDown">
+                    <article v-if="showCustomMessage" class="message is-primary">
+                        <div class="message-header">
+                            <h3>Some Message</h3>
+                        </div>
+                        <p class="message-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, sit.
+                        </p>
+                    </article>
+                </transition>
             </div>
         </section>
     </div>
@@ -53,6 +72,7 @@
             return {
                 showFadeMessage: true,
                 showSlideMessage: true,
+                showCustomMessage: true,
             }
         }
     }
