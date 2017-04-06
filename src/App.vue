@@ -3,7 +3,7 @@
         <section class="section">
             <div class="container has-text-centered">
 
-                <h2 class="subtitle is-3">Transitions</h2>
+                <h2 class="subtitle is-3">Transitions and Animations</h2>
 
                 <div class="block">
                     <span class="select">
