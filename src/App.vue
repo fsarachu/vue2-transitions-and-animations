@@ -10,11 +10,16 @@
                 <h2 class="subtitle is-3">Transitions</h2>
 
                 <div class="block">
-                    <button @click="showFadeMessage = !showFadeMessage" class="button is-primary">Fade Message</button>
+                    <span class="select">
+                        <select v-model="messageAnimation">
+                            <option v-for="animation in animations" :value="animation">{{ animation }}</option>
+                        </select>
+                    </span>
+                    <button @click="showMessage = !showMessage" class="button is-primary">Toggle Message</button>
                 </div>
 
-                <transition name="fade" appear>
-                    <article v-if="showFadeMessage" class="message is-primary">
+                <transition :name="messageAnimation" appear>
+                    <article v-if="showMessage" class="message is-primary">
                         <div class="message-header">
                             <h3>Some Message</h3>
                         </div>
@@ -24,43 +29,6 @@
                     </article>
                 </transition>
 
-                <div class="block">
-                    <button
-                            @click="showSlideMessage = !showSlideMessage"
-                            class="button is-primary">
-                        Slide Message
-                    </button>
-                </div>
-
-                <transition name="slide" appear>
-                    <article v-if="showSlideMessage" class="message is-primary">
-                        <div class="message-header">
-                            <h3>Some Message</h3>
-                        </div>
-                        <p class="message-body">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, sit.
-                        </p>
-                    </article>
-                </transition>
-
-                <div class="block">
-                    <button
-                            @click="showCustomMessage = !showCustomMessage"
-                            class="button is-primary">
-                        Custom Message
-                    </button>
-                </div>
-
-                <transition appear enterActiveClass="animated wobble" leaveActiveClass="animated bounceOutDown">
-                    <article v-if="showCustomMessage" class="message is-primary">
-                        <div class="message-header">
-                            <h3>Some Message</h3>
-                        </div>
-                        <p class="message-body">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, sit.
-                        </p>
-                    </article>
-                </transition>
             </div>
         </section>
     </div>
@@ -70,9 +38,9 @@
     export default {
         data() {
             return {
-                showFadeMessage: true,
-                showSlideMessage: true,
-                showCustomMessage: true,
+                showMessage: true,
+                messageAnimation: 'fade',
+                animations: ['fade', 'slide']
             }
         }
     }
