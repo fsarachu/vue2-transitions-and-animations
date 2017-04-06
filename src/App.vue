@@ -44,20 +44,23 @@
 
                 <h2 class="title is-3">Group Transitions</h2>
 
-                <ul class="panel">
-                    <li class="panel-heading">
-                        <button @click="addRandomItem" class="button is-primary">Add Random Item</button>
-                    </li>
-                    <transition-group name="fade">
+                <div class="block">
+                    <button @click="addRandomItem" class="button is-primary">Add Random Item</button>
+                </div>
+
+                <ul class="panel" style="height: 200px; overflow-y: auto">
+                    <transition-group name="slide" appear>
                         <li v-for="(number, index) in numbers" :key="number" class="panel-block">
-                        <span @click="removeItem(index)" class="panel-icon" style="cursor: pointer; ">
-                            <span class="icon is-small">
-                                <i class="fa fa-close"></i>
+                            <span @click="removeItem(index)" class="panel-icon" style="cursor: pointer; ">
+                                <span class="icon is-small">
+                                    <i class="fa fa-close"></i>
+                                </span>
                             </span>
-                        </span>
                             {{ number }}
+
                         </li>
                     </transition-group>
+
                 </ul>
 
             </div>
@@ -76,7 +79,7 @@
                 animations: ['fade', 'slide'],
                 messageAnimation: 'fade',
                 selectedComponent: 'app-success-message',
-                numbers: [1, 2, 3],
+                numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
             };
         },
         components: {
@@ -112,12 +115,17 @@
     }
 
     .fade-leave {
-
+        position: absolute;
     }
 
     .fade-leave-active {
         transition: opacity .6s ease-out;
         opacity: 0;
+        position: absolute;
+    }
+
+    .fade-move {
+        transition: transform .3s ease-out;
     }
 
     .slide-enter {
@@ -125,36 +133,41 @@
     }
 
     .slide-enter-active {
-        animation: slide-in .6s ease-out forwards;
+        animation: slide-in .3s ease-out forwards;
     }
 
     .slide-leave {
-
+        position: absolute;
     }
 
     .slide-leave-active {
-        animation: slide-out .6s ease-in forwards;
+        animation: slide-out .3s ease-in forwards;
+        position: absolute;
+    }
+
+    .slide-move {
+        transition: transform .3s ease-out;
     }
 
     @keyframes slide-in {
         from {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateX(-100px);
         }
         to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
     }
 
     @keyframes slide-out {
         from {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
         to {
             opacity: 0;
-            transform: translateY(100px);
+            transform: translateX(100px);
         }
     }
 
