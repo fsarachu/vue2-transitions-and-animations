@@ -13,7 +13,7 @@
                     <button @click="showFadeMessage = !showFadeMessage" class="button is-primary">Fade Message</button>
                 </div>
 
-                <transition name="fade">
+                <transition name="fade" appear>
                     <article v-if="showFadeMessage" class="message is-primary">
                         <div class="message-header">
                             <h3>Some Message</h3>
@@ -32,7 +32,7 @@
                     </button>
                 </div>
 
-                <transition name="slide">
+                <transition name="slide" appear>
                     <article v-if="showSlideMessage" class="message is-primary">
                         <div class="message-header">
                             <h3>Some Message</h3>
@@ -51,8 +51,8 @@
     export default {
         data() {
             return {
-                showFadeMessage: false,
-                showSlideMessage: false,
+                showFadeMessage: true,
+                showSlideMessage: true,
             }
         }
     }
@@ -64,7 +64,7 @@
     }
 
     .fade-enter-active {
-        transition: opacity .3s ease-in;
+        transition: opacity .6s ease-in;
     }
 
     .fade-leave {
@@ -72,7 +72,7 @@
     }
 
     .fade-leave-active {
-        transition: opacity .3s ease-out;
+        transition: opacity .6s ease-out;
         opacity: 0;
     }
 
@@ -81,7 +81,7 @@
     }
 
     .slide-enter-active {
-        animation: slide-in .3s ease-out forwards;
+        animation: slide-in .6s ease-out forwards;
     }
 
     .slide-leave {
@@ -89,7 +89,7 @@
     }
 
     .slide-leave-active {
-        animation: slide-out .3s ease-in forwards;
+        animation: slide-out .6s ease-in forwards;
     }
 
     @keyframes slide-in {
