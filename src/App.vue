@@ -3,10 +3,6 @@
         <section class="section">
             <div class="container has-text-centered">
 
-                <h1 class="title is-2">Transitions and Animations</h1>
-
-                <hr>
-
                 <h2 class="subtitle is-3">Transitions</h2>
 
                 <div class="block">
@@ -29,18 +25,49 @@
                     </article>
                 </transition>
 
+                <hr>
+
+                <h2 class="title is-3">Dynamic Components</h2>
+
+                <div class="block">
+                    <button @click="switchComponent" class="button is-primary">Switch component</button>
+                </div>
+
+                <transition
+                        enter-active-class="animated bounceInDown"
+                        leave-active-class="animated bounceOutRight"
+                        mode="out-in">
+                    <component :is="selectedComponent"></component>
+                </transition>
             </div>
         </section>
     </div>
 </template>
 
 <script>
+    import appSuccessMessage from './SuccessMessage.vue';
+    import appDangerMessage from './DangerMessage.vue';
+
     export default {
         data() {
             return {
                 showMessage: true,
+                animations: ['fade', 'slide'],
                 messageAnimation: 'fade',
-                animations: ['fade', 'slide']
+                selectedComponent: 'app-success-message'
+            };
+        },
+        components: {
+            appSuccessMessage,
+            appDangerMessage,
+        },
+        methods: {
+            switchComponent() {
+                if (this.selectedComponent == 'app-success-message') {
+                    this.selectedComponent = 'app-danger-message';
+                } else {
+                    this.selectedComponent = 'app-success-message';
+                }
             }
         }
     }
