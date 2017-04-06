@@ -39,6 +39,27 @@
                         mode="out-in">
                     <component :is="selectedComponent"></component>
                 </transition>
+
+                <hr>
+
+                <h2 class="title is-3">Group Transitions</h2>
+
+                <ul class="panel">
+                    <li class="panel-heading">
+                        <button @click="addRandomItem" class="button is-primary">Add Random Item</button>
+                    </li>
+                    <transition-group name="fade">
+                        <li v-for="(number, index) in numbers" :key="number" class="panel-block">
+                        <span @click="removeItem(index)" class="panel-icon" style="cursor: pointer; ">
+                            <span class="icon is-small">
+                                <i class="fa fa-close"></i>
+                            </span>
+                        </span>
+                            {{ number }}
+                        </li>
+                    </transition-group>
+                </ul>
+
             </div>
         </section>
     </div>
@@ -54,7 +75,8 @@
                 showMessage: true,
                 animations: ['fade', 'slide'],
                 messageAnimation: 'fade',
-                selectedComponent: 'app-success-message'
+                selectedComponent: 'app-success-message',
+                numbers: [1, 2, 3],
             };
         },
         components: {
@@ -68,6 +90,13 @@
                 } else {
                     this.selectedComponent = 'app-success-message';
                 }
+            },
+            removeItem(index) {
+                this.numbers.splice(index, 1);
+            },
+            addRandomItem() {
+                let position = Math.floor(Math.random() * this.numbers.length);
+                this.numbers.splice(position, 0, this.numbers.length + 1);
             }
         }
     }
